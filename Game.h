@@ -33,6 +33,7 @@ private:
 	void CreateRandomTetromino(Tetromino*& tetrominoPointer);
 
 	bool stop = false;
+	bool canLoseCheck = false;
 	int score;
 
 	float timer{0};

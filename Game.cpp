@@ -69,50 +69,63 @@ void Game::Update()
 		if (IsKeyPressed(KEY_SPACE)) {
 			Reset();
 		}
+	}
+	else {
+		timer += GetFrameTime();
 
-		return;
-	}
+		if (IsKeyPressed(KEY_E))
+		{
+			currentTetromino->TryRotateClockwise();
+		}
+		else if (IsKeyPressed(KEY_Q))
+		{
+			currentTetromino->TryRotateCounterClockwise();
+		}
 
-	timer += GetFrameTime();
-
-	if (IsKeyPressed(KEY_E))
-	{
-		currentTetromino->TryRotateClockwise();
-	}
-	else if (IsKeyPressed(KEY_Q))
-	{
-		currentTetromino->TryRotateCounterClockwise();
-	}
-
-	if (IsKeyPressed(KEY_A))
-	{
-		currentTetromino->TryMoveLeft();
-	}
-	else if (IsKeyPressed(KEY_D))
-	{
-		currentTetromino->TryMoveRight();
-	}
-	else if (IsKeyDown(KEY_S))
-	{
-		if (!currentTetromino->TryMoveDown()) {
-			FollowingTetromino();
-			// Check lose condition!
+		if (IsKeyPressed(KEY_A))
+		{
+			currentTetromino->TryMoveLeft();
+		}
+		else if (IsKeyPressed(KEY_D))
+		{
+			currentTetromino->TryMoveRight();
+		}
+		else if (IsKeyDown(KEY_S))
+		{
 			if (!currentTetromino->TryMoveDown()) {
-				stop = true;
-				delete currentTetromino;
+
+				if (canLoseCheck) {
+					stop = true;
+					canLoseCheck = false;
+					delete currentTetromino;
+				}
+				else {
+					FollowingTetromino();
+					// Check lose condition!
+					if (!currentTetromino->TryMoveDown()) {
+						canLoseCheck = true;
+					}
+				}
 			}
 		}
-	}
 
-	if (timer >= timerLife)
-	{
-		timer = 0;
-		if (!currentTetromino->TryMoveDown()) {
-			FollowingTetromino();
-			// Check lose condition!
+		if (timer >= timerLife)
+		{
+			timer = 0;
 			if (!currentTetromino->TryMoveDown()) {
-				stop = true;
-				delete currentTetromino;
+
+				if (canLoseCheck) {
+					stop = true;
+					canLoseCheck = false;
+					delete currentTetromino;
+				}
+				else {
+					FollowingTetromino();
+					// Check lose condition!
+					if (!currentTetromino->TryMoveDown()) {
+						canLoseCheck = true;
+					}
+				}
 			}
 		}
 	}

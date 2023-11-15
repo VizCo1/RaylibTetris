@@ -1,5 +1,6 @@
 #include "Tetromino.h"
 #include <iostream>
+#include<algorithm>
 
 Tetromino::Tetromino(const bool* shape, int dimension, Color color, Board& board)
 	: shape(shape),
@@ -240,8 +241,8 @@ Vec2<int> Tetromino::GetWiredBoardPos() const
 		{
 			lowerY = i;
 		}
-		else {
-			return Vec2<int>(boardPos.GetX(), lowerY);
+		else {	
+			return Vec2<int>(boardPos.GetX(), lowerY);			
 		}
 	}
 
@@ -277,10 +278,8 @@ void Tetromino::Draw() const
 			bool cell = GetCellStatusFromRotation(currentRotation, x, y);
 			if (cell)
 			{
-				Vec2<int> pos = boardPos + Vec2{ x, y };
-
+				Vec2<int> pos = boardPos + Vec2<int>{ x, y };
 				board.DrawCell(pos, color);
-
 			}
 		}
 	}
@@ -290,8 +289,8 @@ void Tetromino::Draw() const
 			bool cell = GetCellStatusFromRotation(currentRotation, x, y);
 			if (cell)
 			{
-				Vec2<int> pos = GetWiredBoardPos() + Vec2{x, y};
-
+				Vec2<int> pos = GetWiredBoardPos() + Vec2<int>{x, y};
+				pos.SetY(std::clamp(pos.GetY(), 0, board.GetHeight() - 1));
 				board.DrawWiredCell(pos, color);
 			}
 		}

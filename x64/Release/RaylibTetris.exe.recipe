@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\1 Proyectos Raylib\RaylibTemplate\x64\Release\RaylibTemplate.exe</FullPath>
+      <FullPath>D:\1 Proyectos Raylib\RaylibTetris\x64\Release\RaylibTetris.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

@@ -39,13 +39,16 @@ void UserInterface::DrawDisplayedTetromino() const
 
 void UserInterface::DrawGameOver() const
 {
-	std::string s = "GAME OVER!";
-	Vec2<int> screenPos(settings::screenWidth * 0.25, settings::screenHeight * 0.4);
-	Vec2<int> screenPos2(settings::screenWidth * 0.25, settings::screenHeight * 0.55);
-	Vec2<int> screenPos3(settings::screenWidth * 0.25, settings::screenHeight * 0.70);
-	raycpp::DrawText(s.c_str(), screenPos, settings::fontSize * 2, RAYWHITE);
-	raycpp::DrawText(("POINTS: " + std::to_string(game.GetScore())).c_str(), screenPos2, settings::fontSize * 1.5, RAYWHITE);
-	raycpp::DrawText("PRESS SPACE TO RESTART THE GAME", screenPos3, settings::fontSize, RAYWHITE);
+	std::string gameOverText = "GAME OVER!";
+	std::string pointsText = "POINTS: ";
+	pointsText += std::to_string(game.GetScore());
+	std::string restartText = "PRESS SPACE TO RESTART THE GAME";
+	Vec2<int> screenPos(settings::screenWidth * 0.05, settings::screenHeight * 0.15);
+	Vec2<int> screenPos2(settings::screenWidth * 0.05, settings::screenHeight * 0.35);
+	Vec2<int> screenPos3(settings::screenWidth * 0.05, settings::screenHeight * 0.50);
+	raycpp::DrawText(gameOverText.c_str(), screenPos, settings::fontSize * 2, RAYWHITE);
+	raycpp::DrawText(pointsText.c_str(), screenPos2, settings::fontSize * 1.5, RAYWHITE);
+	raycpp::DrawText(restartText.c_str(), screenPos3, settings::fontSize, RAYWHITE);
 }
 
 void UserInterface::DrawTetrominoShape() const
@@ -60,7 +63,7 @@ void UserInterface::DrawTetrominoShape() const
 		for (int iX = 0; iX < tetromino->GetDimension(); iX++) {
 			if (tetromino->GetShape()[iY * tetromino->GetDimension() + iX]) {
 				Vec2<int> topLeft = screenPos + padding + (Vec2<int>{iX, iY} * cellSize);
-				raycpp::DrawRectangle(topLeft, Vec2{ cellSize, cellSize } - padding, tetromino->GetColor());
+				raycpp::DrawRectangle(topLeft, Vec2<int>{ cellSize, cellSize } - padding, tetromino->GetColor());
 			}
 		}
 	}

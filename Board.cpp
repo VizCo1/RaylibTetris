@@ -67,14 +67,14 @@ void Board::DrawCell(Vec2<int> pos, Color color) const
 {
 	assert(pos.GetX() >= 0 && pos.GetY() >= 0 && pos.GetX() < width && pos.GetY() < height); // If assertion triggers : x or y is out of bounds
 	Vec2<int> topLeft = screenPos + padding + (pos * cellSize);
-	raycpp::DrawRectangle(topLeft, Vec2{ cellSize, cellSize } - padding, color);
+	raycpp::DrawRectangle(topLeft, Vec2<int>{ cellSize, cellSize } - padding, color);
 }
 
 void Board::DrawWiredCell(Vec2<int> pos, Color color) const
 {
 	assert(pos.GetX() >= 0 && pos.GetY() >= 0 && pos.GetX() < width && pos.GetY() < height); // If assertion triggers : x or y is out of bounds
 	Vec2<int> topLeft = screenPos + padding + (pos * cellSize);
-	raycpp::DrawRectangleLinesEx(topLeft, Vec2{ cellSize, cellSize } - padding, 1, color);
+	raycpp::DrawRectangleLinesEx(topLeft, Vec2<int>{ cellSize, cellSize } - padding, 1, color);
 }
 
 void Board::DrawBorder() const
